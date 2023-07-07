@@ -13,6 +13,20 @@ func init() {
 	exports["goAdd"] = add
 	exports["goLog"] = log
 
+	exports["maybeAImpl"] = maybeA
+
+}
+
+func maybeA(just any) any {
+	return func(nothing any) any {
+		return func(v any) any {
+			if v.(string) == "a" {
+				return just.(func(any) any)(v)
+			} else {
+				return nothing
+			}
+		}
+	}
 }
 
 func add(a any) any {
